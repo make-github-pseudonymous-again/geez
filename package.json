@@ -1,11 +1,15 @@
 {
   "name": "geez",
-  "description": "Take a quick look at your repos",
+  "description": "Quickly pull all your repos",
   "version": "1.0.0",
   "author": "Aurélien Ooms <aurelien.ooms@gmail.com>",
   "bin": "cli.js",
   "bugs": {
     "url": "https://github.com/aureooms/geez/issues"
+  },
+  "dependencies": {
+    "execa": "^0.6.3",
+    "listr": "^0.11.0"
   },
   "homepage": "https://github.com/aureooms/geez#readme",
   "license": "AGPL-3.0",
