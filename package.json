@@ -3,13 +3,34 @@
   "description": "Quickly pull all your repos",
   "version": "1.0.1",
   "author": "Aurélien Ooms <aurelien.ooms@gmail.com>",
-  "bin": "cli.js",
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ],
+    "env": {
+      "development": {
+        "sourceMaps": "inline"
+      }
+    }
+  },
+  "bin": "lib/cli.js",
   "bugs": {
     "url": "https://github.com/aureooms/geez/issues"
   },
   "dependencies": {
     "execa": "^0.6.3",
     "listr": "^0.11.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0"
   },
   "homepage": "https://github.com/aureooms/geez#readme",
   "license": "AGPL-3.0",
@@ -18,6 +39,7 @@
     "url": "git+https://github.com/aureooms/geez.git"
   },
   "scripts": {
+    "build": "babel src -d lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
