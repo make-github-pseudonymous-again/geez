@@ -1,6 +1,6 @@
 {
   "name": "geez",
-  "description": "Quickly pull all your repos",
+  "description": "Quickly pull or push all your repos",
   "version": "1.1.0",
   "author": "Aurélien Ooms <aurelien.ooms@gmail.com>",
   "babel": {

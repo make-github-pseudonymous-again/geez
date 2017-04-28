@@ -6,18 +6,33 @@ import { repos_promise } from  './repos' ;
 
 const cwd = '.' ;
 
+const args = process.argv.slice(2);
+
+if ( args.length !== 1 ) {
+	console.error(`usage: ${process.argv0} <command>`);
+	process.exit(2);
+}
+const available_commands = [ 'pull' , 'push' ] ;
+
+const cmd = args[0] ;
+
+if ( ! available_commands.includes(cmd) ) {
+	console.error(`Unknown command '${cmd}'.`);
+	process.exit(2);
+}
+
 const tasks = new Listr([
 	{
 		title: 'Searching for repos',
 		task: ctx => repos_promise(cwd).then( repos => { ctx.repos = repos ; } )
 	},
 	{
-		title: 'Pulling repos',
+		title: `${cmd[0].toUpperCase()}${cmd.substring(1)}ing repos`,
 		task: ctx => {
 
 			const pullingtasks = ctx.repos.map(repo => ({
 				title: repo,
-				task: () => execa('git', ['-C', repo, 'pull'])
+				task: () => execa('git', ['-C', repo, cmd])
 			}));
 
 			return new Listr(pullingtasks, {
