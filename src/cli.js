@@ -9,7 +9,7 @@ const cwd = '.' ;
 const args = process.argv.slice(2);
 
 if ( args.length !== 1 ) {
-	console.error(`usage: ${process.argv0} <command>`);
+	console.error('usage: geez {pull|push}');
 	process.exit(2);
 }
 const available_commands = [ 'pull' , 'push' ] ;
