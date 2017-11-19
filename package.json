@@ -1,6 +1,6 @@
 {
   "name": "geez",
-  "description": "Quickly pull or push all your repos",
+  "description": "Quickly apply git commands to all your repos",
   "version": "2.0.4",
   "author": "Aurélien Ooms <aurelien.ooms@gmail.com>",
   "babel": {
