@@ -31,7 +31,8 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.6.1",
+    "np": "^2.17.0"
   },
   "homepage": "https://github.com/aureooms/geez#readme",
   "license": "AGPL-3.0",
@@ -41,6 +42,7 @@
   },
   "scripts": {
     "build": "babel src -d lib",
+    "release": "np",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
