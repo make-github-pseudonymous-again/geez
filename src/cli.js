@@ -3,6 +3,7 @@
 import execa from 'execa' ;
 import Listr from 'listr' ;
 import { repos_promise } from  './repos' ;
+import renderer from '@aureooms/listr-aggregate-renderer' ;
 
 const cwd = '.' ;
 
@@ -43,7 +44,10 @@ const tasks = new Listr([
 		}
 	}
 ], {
+	renderer,
 	collapse: false,
+	aggregate: true,
+	maxsubtasks: 10,
 	//showSubtasks: false
 });
 
