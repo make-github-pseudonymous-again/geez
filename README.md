@@ -1,6 +1,6 @@
 # geez
 
-[![demo](https://asciinema.org/a/dcu507d1s3txtks8vfqr371jb.png)](https://asciinema.org/a/dcu507d1s3txtks8vfqr371jb?autoplay=1)
+[![demo](https://asciinema.org/a/UUo3oTKr4Dlammr71IbXOHOoi.png)](https://asciinema.org/a/UUo3oTKr4Dlammr71IbXOHOoi?autoplay=1)
 
 ## Installation
 
