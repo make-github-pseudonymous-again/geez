@@ -25,7 +25,7 @@
     "url": "https://github.com/aureooms/geez/issues"
   },
   "dependencies": {
-    "@aureooms/listr-aggregate-renderer": "^0.0.3",
+    "@aureooms/listr-aggregate-renderer": "^0.0.4",
     "execa": "^0.10.0",
     "listr": "^0.14.1"
   },
