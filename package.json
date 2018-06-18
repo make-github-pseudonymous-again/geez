@@ -26,13 +26,13 @@
   },
   "dependencies": {
     "@aureooms/listr-aggregate-renderer": "^0.0.3",
-    "execa": "^0.8.0",
-    "listr": "^0.13.0"
+    "execa": "^0.10.0",
+    "listr": "^0.14.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "np": "^2.17.0"
+    "babel-preset-env": "^1.7.0",
+    "np": "^3.0.4"
   },
   "homepage": "https://github.com/aureooms/geez#readme",
   "license": "AGPL-3.0",
