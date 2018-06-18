@@ -56,7 +56,7 @@ const tasks = new Listr([
 			}));
 
 			return new Listr(pullingtasks, {
-				concurrent:true,
+				concurrent:10, // true is too slow when there are a lot of repos
 				exitOnError:false
 			});
 
