@@ -14,24 +14,11 @@ if ( args.length < 1 ) {
 	process.exit(2);
 }
 
-let available_commands = [ ] ;
-
-let result = execa.sync('git', ['config', '-l']);
+const result = execa.sync('git', ['help', '-a']);
 let lines = result.stdout.split('\n');
-lines = lines.filter( line => line.startsWith('alias.') );
-lines = lines.map( line => line.split('=')[0] );
-lines = lines.map( line => line.split('.')[1] );
-available_commands = available_commands.concat(lines);
-
-result = execa.sync('git', ['help', '-a']);
-lines = result.stdout.split('\n');
-lines = lines.filter( line => line.match(/^  [a-z]/) );
-lines = lines.map( line => line.split(' ') );
-for ( const line of lines ) {
-	available_commands = available_commands.concat(line.filter(line => line));
-}
-
-available_commands.sort();
+lines = lines.filter( line => line.match(/^\s+[a-z]/) );
+lines = lines.map( line => line.trim().split(/\s+/)[0] );
+const available_commands = lines.sort();
 
 const cmd = args[0] ;
 
