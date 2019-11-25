@@ -5,14 +5,7 @@
   "author": "Aurélien Ooms <aurelien.ooms@gmail.com>",
   "babel": {
     "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
+      "@babel/preset-env"
     ],
     "env": {
       "development": {
@@ -30,10 +23,14 @@
     "listr": "0.14.3"
   },
   "devDependencies": {
-    "babel-cli": "6.26.0",
-    "babel-preset-env": "1.7.0",
+    "@babel/cli": "7.7.4",
+    "@babel/core": "7.7.0",
+    "@babel/preset-env": "7.7.4",
     "np": "3.1.0"
   },
+  "files": [
+    "lib"
+  ],
   "homepage": "https://github.com/aureooms/geez#readme",
   "license": "AGPL-3.0",
   "repository": {
@@ -41,7 +38,8 @@
     "url": "git+https://github.com/aureooms/geez.git"
   },
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "rm -rf lib && babel src -d lib",
+    "prepare": "npm run build",
     "release": "np",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
