@@ -23,9 +23,9 @@
     "listr": "0.14.3"
   },
   "devDependencies": {
-    "@babel/cli": "7.8.4",
-    "@babel/core": "7.9.0",
-    "@babel/preset-env": "7.9.5",
+    "@babel/cli": "7.10.0",
+    "@babel/core": "7.10.0",
+    "@babel/preset-env": "7.10.0",
     "np": "5.2.1"
   },
   "files": [
