@@ -65,6 +65,11 @@ const tasks = new Listr([
 	//showSubtasks: false
 });
 
-tasks.run().catch(err => {
-	//console.error(err);
-});
+tasks.run().then(
+	() => {
+		process.exitCode = 0;
+	},
+	() => {
+		process.exitCode = 1;
+	},
+);
