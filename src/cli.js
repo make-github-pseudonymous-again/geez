@@ -5,8 +5,6 @@ import Listr from 'listr' ;
 import { repos_promise } from  './repos' ;
 import renderer from '@aureooms/listr-aggregate-renderer' ;
 
-const cwd = '.' ;
-
 const args = process.argv.slice(2);
 
 if ( args.length < 1 ) {
@@ -28,10 +26,20 @@ if ( ! available_commands.includes(cmd) ) {
 	process.exit(2);
 }
 
+const cwd = process.env.GEEZ_CWD || '.' ;
+const symlink_depth = Number.parseInt(process.env.GEEZ_SYMLINK_DEPTH, 10) || 0;
+const hidden_depth = Number.parseInt(process.env.GEEZ_HIDDEN_DEPTH, 10) || 0;
+const concurrent = Number.parseInt(process.env.GEEZ_CONCURRENT, 10) || 10; // true is too slow when there are a lot of repos
+
+const repos_options = {
+	symlink_depth,
+	hidden_depth
+};
+
 const tasks = new Listr([
 	{
 		title: 'Searching for repos',
-		task: ctx => repos_promise(cwd).then( repos => { ctx.repos = repos ; } )
+		task: ctx => repos_promise(cwd, repos_options).then( repos => { ctx.repos = repos ; } )
 	},
 	{
 		title: `Applying 'git ${args.join(' ')}' to all repos`,
@@ -43,8 +51,8 @@ const tasks = new Listr([
 			}));
 
 			return new Listr(pullingtasks, {
-				concurrent:10, // true is too slow when there are a lot of repos
-				exitOnError:false
+				concurrent,
+				exitOnError: false
 			});
 
 		}
@@ -53,7 +61,7 @@ const tasks = new Listr([
 	renderer,
 	collapse: false,
 	aggregate: true,
-	maxsubtasks: 10,
+	maxsubtasks: concurrent,
 	//showSubtasks: false
 });
 

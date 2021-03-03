@@ -3,7 +3,7 @@ import fs from 'fs' ;
 import path from 'path' ;
 import { promise_callback } from './promise' ;
 
-export function repos_callback ( dir , callback ) {
+export function repos_callback ( dir , {symlink_depth, hidden_depth}, callback ) {
 
 	  fs.readdir(dir, function(err, files) {
 
@@ -19,7 +19,9 @@ export function repos_callback ( dir , callback ) {
 
 		for ( const file of files ) {
 
-			if ( file[0] === '.' ) {
+			const isHidden = file[0] === '.';
+
+			if ( hidden_depth <= 0 && isHidden ) {
 				if (!--pending) callback( null , results ) ;
 				continue ; // skip hidden
 			}
@@ -28,13 +30,18 @@ export function repos_callback ( dir , callback ) {
 
 			fs.lstat(filepath, function(err, stat) {
 
-				if ( err || stat.isSymbolicLink() || !stat.isDirectory() ) {
+				if ( err || (symlink_depth <= 0 && stat.isSymbolicLink()) || (!stat.isSymbolicLink() && !stat.isDirectory()) ) {
 					if (!--pending) callback( null , results ) ; // skip
 				}
 
 				else {
 
-					repos_callback(filepath, function(err, res) {
+					const options = {
+						hidden_depth: isHidden ? hidden_depth - 1 : hidden_depth,
+						symlink_depth: stat.isSymbolicLink() ? symlink_depth - 1 : symlink_depth
+					};
+
+					repos_callback(filepath, options, function(err, res) {
 
 						if (err) {
 
@@ -62,19 +69,19 @@ export function repos_callback ( dir , callback ) {
 
 }
 
-export function repos_executor ( dir ) {
+export function repos_executor ( dir, options ) {
 
 	return function ( resolve , reject ) {
 
 		const callback = promise_callback( resolve , reject ) ;
-		repos_callback( dir , callback );
+		repos_callback( dir , options, callback );
 
 	}
 
 }
 
-export function repos_promise ( dir ) {
+export function repos_promise ( dir, options ) {
 
-	return new Promise( repos_executor(dir) ) ;
+	return new Promise( repos_executor(dir, options) ) ;
 
 }
