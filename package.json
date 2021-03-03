@@ -1,7 +1,7 @@
 {
   "name": "geez",
   "description": "Quickly apply git commands to all your repos",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "author": "Aurélien Ooms <aurelien.ooms@gmail.com>",
   "babel": {
     "presets": [
